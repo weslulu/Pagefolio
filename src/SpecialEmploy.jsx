@@ -29,7 +29,7 @@ function SpecialEmploy() {
   };
 
   return (
-    <div className="w-full flex justify-center items-center py-8 sm:py-5 md:py-5 lg:py-20 px-1 md:px-11 bg-white">
+    <div className="w-full flex justify-center items-center py-8 sm:py-5 md:py-5 lg:py-20 px-1  bg-white">
       <div className="bg-[#0A5C80] px-30 py-8 max-w-6xl md:py-5 w-full relative">
         <h2 className="text-white font-medium text-3xl p-2 mb-4 text-center">افرادنــا المتميزيــن</h2>
         {employees.length > 0 && (
