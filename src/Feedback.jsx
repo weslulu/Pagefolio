@@ -1,4 +1,3 @@
-
 import "./Feedback.css";
 import { useState, useEffect, useRef } from 'react';
 
@@ -16,31 +15,40 @@ function Feedback() {
 
   useEffect(() => {
     const startAutoScroll = (container, direction) => {
+      if (!container) return;
       let scrollAmount = 1;
       const interval = setInterval(() => {
-        if (!isPaused && container) {
+        if (!isPaused) {
           container.scrollLeft += scrollAmount * direction;
-          if (container.scrollLeft + container.clientWidth >= container.scrollWidth || container.scrollLeft <= 0) {
-            scrollAmount *= -1;
+
+          // إعادة التمرير بسلاسة عند الوصول للنهاية
+          if (direction === 1 && container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+            container.scrollLeft = 1;
+          }
+          if (direction === -1 && container.scrollLeft <= 1) {
+            container.scrollLeft = container.scrollWidth - container.clientWidth - 1;
           }
         }
-      }, 20);
+      }, 25);
       return interval;
     };
 
-    const intervals = scrollContainers.current.map((container, idx) => {
-      const direction = idx % 2 === 0 ? 1 : -1; 
-      return startAutoScroll(container, direction);
-    });
+    const intervals = scrollContainers.current
+      .filter((container) => container !== null) 
+      .map((container, idx) => {
+        const direction = idx % 2 === 0 ? 1 : -1;
+        return startAutoScroll(container, direction);
+      });
+
     return () => intervals.forEach((interval) => clearInterval(interval));
   }, [isPaused]);
 
   const renderCard = (review) => (
     <div
-      key={review.id}
+      key={review.id} 
       onMouseEnter={() => { setHoveredReview(review); setIsPaused(true); }}
       onMouseLeave={() => { setHoveredReview(null); setIsPaused(false); }}
-      className="relative bg-white rounded-full px-2 sm:px-3 py-2 shadow text-xs sm:text-sm cursor-pointer flex items-center gap-1 sm:gap-2 min-w-[180px] sm:min-w-[199px] hover:shadow-lg transition transform hover:scale-105"
+      className="relative bg-white rounded-full px-2 sm:px-3 py-2 shadow text-xs sm:text-sm cursor-pointer flex items-center gap-1 sm:gap-2 min-w-[200px] sm:min-w-[220px] hover:shadow-lg transition transform hover:scale-105"
     >
       <div className="flex items-center gap-3">
         <img
@@ -61,14 +69,16 @@ function Feedback() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-xl sm:text-2xl lg:text-4xl text-center font-bold mb-4">وش قالــوا عـن هبـــّــــاب؟</h1>
-      <div className="w-full max-w-md sm:max-w-lg lg:max-w-4xl py-4 sm:py-8 lg:py-13 bg-gradient-to-r from-white via-blue-200 to-white">
+      <div className="w-full max-w-3xl sm:max-w-4xl lg:max-w-7xl py-4 sm:py-8 lg:py-13 bg-gradient-to-r from-white via-blue-200 to-white">
         {Array.from({ length: 3 }).map((_, idx) => (
           <div
-            key={idx}
-            ref={(el) => (scrollContainers.current[idx] = el)}
+            key={`scroll-container-${idx}`}
+            ref={(el) => {
+              if (el) scrollContainers.current[idx] = el;
+            }}
             className="scroll-container gap-2 py-1 px-30 flex overflow-hidden mb-2 whitespace-nowrap"
           >
-            {reviews.slice(idx * 6, idx * 6 + 6).map(renderCard)}
+            {reviews.slice(idx * 6, idx * 6 + 6).map((review) => renderCard(review))}
           </div>
         ))}
       </div>
@@ -78,7 +88,7 @@ function Feedback() {
             <img src={hoveredReview.image || 'src/assets/images/Screenshot 2025-05-07 034546.png'} alt={hoveredReview.name} className="w-12 h-12 rounded-xl mr-4" />
             <div>
               <h2 className="text-sm sm:text-md lg:text-lg font-bold">{hoveredReview.name}</h2>
-              <div className="flex text-yellow-400 ">
+              <div className="flex text-yellow-400">
                 {Array.from({ length: 5 }, (_, i) => (
                   <span key={i}>{i < hoveredReview.rating ? '★' : '☆'}</span>
                 ))}
