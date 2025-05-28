@@ -1,38 +1,59 @@
+// src/components/Navbar.jsx
+
+import companyData from "../data/companyData";
+
 const Navbar = () => {
+  const {
+    logo,
+    links,
+    createButtonText,
+    loginButtonText,
+    createButtonBg,
+    createButtonHover,
+    createButtonTextColor,
+    loginButtonTextColor,
+  } = companyData.navbar;
+
   return (
-    <nav className="font-[Cairo] w-full bg-transparent ">
-      <div className="flex items-center md:justify-between px-4 py-4 md:px-20 justify-center	">
+    <nav className="font-[Cairo] w-full bg-transparent">
+      <div className="flex flex-wrap items-center lg:justify-between px-4 py-4 md:px-20 justify-center">
         
         {/* يمين الصفحة: الشعار + السكشنات */}
-        <div className="flex items-center gap-6 ">
+        <div className="flex flex-wrap justify-center items-center gap-6">
           {/* الشعار */}
           <div>
             <img
-              src="src/assets/Logohbab.png"
+              src={logo}
               alt="شعار"
               className="w-20 h-16 md:w-24 md:h-20"
             />
           </div>
 
           {/* روابط السكشنات */}
-          <ul className="flex flex-wrap gap-4 text-white font-bold text-sm md:text-base">
-            <li className="cursor-pointer">من نحن</li>
-            <li className="cursor-pointer">واجهتنا</li>
-            <li className="cursor-pointer">المميزات</li>
-            <li className="cursor-pointer">عملاءنا</li>
+          <ul className="flex flex-wrap gap-3 justify-center lg:gap-6 text-white font-bold text-sm md:text-base">
+            {links.map((link, index) => (
+              <li key={index} className="cursor-pointer">
+                <a href={link.href} className="hover:text-amber-200">
+                  {link.name}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* يسار الصفحة: الأزرار */}
-        <div className="hidden md:flex items-center gap-3">
-          <button className="bg-[#DCB12E] text-white px-4 py-1 rounded-full text-sm md:text-base hover:bg-[#bb9d5b] transition cursor-pointer">
-            !انشئ ملفك
+        <div className="hidden md:flex  items-center gap-3">
+          <button
+            className={`px-4 py-1 rounded-full text-sm md:text-base transition cursor-pointer ${createButtonBg} ${createButtonHover} ${createButtonTextColor}`}
+          >
+            {createButtonText}
           </button>
-          <button className="text-[#DCAD27] font-extrabold text-sm md:text-base cursor-pointer">
-            للدخول لملفك
+          <button
+            className={`font-extrabold text-sm md:text-base cursor-pointer ${loginButtonTextColor}`}
+          >
+            {loginButtonText}
           </button>
         </div>
-
       </div>
     </nav>
   );

@@ -1,32 +1,32 @@
-import GoalItem from './GoalItem';
+import GoalItem2 from './GoalItem2';
 import companyData from '../data/companyData';
 
 const GoalsSection = () => {
   const {
-    background,
     title,
     titleColor,
     titleSize,
     itemTitleSize,
     itemTitleColor,
+    textColor,
     goals,
-  } = companyData.goalsSection;
+  } = companyData.goalsSection2;
 
   return (
-    <section className={`${background} px-12 py-20 lg:px-30 text-right`}>
-      <div className="mx-auto">
-        <h2 className={`${titleSize} font-bold ${titleColor} mb-15 text-center`}>
-          {title}
-        </h2>
-        <div className="flex flex-wrap justify-center gap-5 ">
+    <section className={" px-12 py-20 lg:px-50 "}>
+      <div className=" text-right">
+        <h2 className={`${titleSize} font-bold ${titleColor} mb-12 text-center`}>   {title}  </h2>
+        <div className="flex flex-wrap justify-center gap-9 ">
           {goals.map((goal, index) => (
-            <div key={index} className="w-full md:w-[48%]">
-              <GoalItem
+            <div key={index} className=" md:w-[30%] w-full"> 
+
+              <GoalItem2
                 iconSrc={goal.iconSrc}
                 title={goal.title}
+                text={goal.text}
                 titleColor={itemTitleColor}
                 titleSize={itemTitleSize}
-              />
+                textColor={textColor}/>
             </div>
           ))}
         </div>

@@ -1,0 +1,135 @@
+import mapImage from "/src/assets/Map.png";
+import flag2 from "../assets/flag2.png"
+
+const ContactSection = () => {
+  return (
+    <section>
+      <img src={flag2} className="absolute buttom-0 right-0 left-0 w-full " ></img>            
+
+<div className=" bg-no-repeat bg-gradient-to-r from-[#FFEB9A] via-[#D9AE28] to-[#E0AA25] py-20 md:px-30 px-13">
+
+      <div className=" flex flex-col lg:flex-row items-center md:justify-between md:gap-10 gap-3">
+        {/* خريطة */}
+        <a href="*" target="_blank">
+          <img
+            src={mapImage}
+            className=" rounded-lg shadow-w-100 w-full h-full object-cover"
+          />
+        </a>
+
+        {/* نص */}
+        <div className="text-white max-w-xl lg:text-right text-center">
+          <h2 className="text-3xl md:text-3xl font-bold mb-4">
+            قم بزيارتنا للوصول وانضم الينا
+          </h2>
+          <p className="leading-loose text-sm md:text-base">
+            في موقعنا، نؤمن أن كل فكرة تستحق أن تظهر بأفضل شكل على الإنترنت، لذلك أنشأنا نظامًا سريعًا ومرنًا يتيح لك الحصول على موقع إلكتروني خاص بك بكل سهولة. كل ما عليك هو تزويدنا بمعلوماتك الأساسية، ونحن سنتولى الباقي! من خلال منصتنا، نقوم بإنشاء موقع ديناميكي مصمم حسب احتياجك، سواء كنت صاحب مشروع، مقدم خدمة، أو حتى شخص يريد عرض أعماله في بورتفوليو أنيق. لا حاجة لأي خبرة تقنية، فقط زرنا أو تواصل معنا، وسنحوّل فكرتك إلى موقع فعّال يعكس هويتك ويبرز تميزك.
+          </p>
+        </div>
+      </div>
+    </div>
+    </section>
+    
+  );
+};
+
+export default ContactSection;
+
+
+
+
+
+
+
+import ServiceCard2 from "./ServiceCard2";
+import companyData from "../data/companyData";
+
+const ServicesSection2 = () => {
+  const { sectionTitle, sectionTitleColor, background, list } = companyData.services2;
+
+  return (
+    <section className={` py-15 ${background} `}>
+        <h1 className={`text-3xl md:text-5xl font-medium text-center mb-4 md:mb-8 ${sectionTitleColor}`}>الخدمات التي نقدمها</h1>
+          <p className={`text-[13px] px-5 md:text-xl text-center mb-10 md:mb-10 ${sectionTitleColor}`}>نحن لا نقدم مجرد خدمات، بل نبني شراكة تساهم في تعزيز حضورك الرقمي. خدماتنا مصممة وفق رؤيتك، وتُنفذ باحتراف لتحقيق نتائج ملموسة</p>
+
+          <div className="flex flex-col gap-4  px-5 text-right text-white
+                          lg:flex-row lg:gap-1 lg:items-center lg:justify-between lg:px-40  ">
+
+
+
+      {/* ------------------------------------------------------------------------------------------------------------------------------- */} 
+            <div className="p-1 flex flex-col gap-2">
+               <div className="flex justify-center lg:justify-end">
+              <img className="w-90 h-55  bg-white rounded-lg object-cover shadow-2xl hover:shadow-[0_0_12px_8px_rgba(247,210,80,0.9)]" src="/src/assets/services/ser1.png"/>
+                </div>
+                <h2 className="font-bold text-lg">نعكس هويتك بدقة</h2>
+              <p className="text-sm lg:max-w-[610px] lg:break-words">نصمم لك موقع بورتفوليو احترافي يعكس هوية شركتك بدقة، ويُبرز نقاط قوتك بأسلوب جذاب ويمنح عملاءك انطباعًا مميزًا</p>
+                        
+              <div className=" flex flex-row justify-end mt-3">
+
+                <a className=" flex flex-row justify-between items-center py-1 px-5 rounded-full text-sm md:text-base transition cursor-pointer bg-[#DCB12E] hover:bg-[#bb9d5b] w-38 lg:w-35" href="####">
+                      <img className="w-6 h-5 lg:w-5 lg:h-4" src="/src/assets/Arrowbut.png" alt="" />
+                      <p className="lg:text-[13px] h-6.5 lg:h-6">اكتشف المزيد</p>
+                </a>
+              </div>
+            </div>
+      {/* ------------------------------------------------------------------------------------------------------------------------------- */} 
+              <div className="p-1 flex flex-col gap-2">
+               <div className="flex flex-row justify-center lg:justify-end">
+              <img className="w-90 h-55  bg-white rounded-lg object-cover shadow-2xl hover:shadow-[0_0_12px_8px_rgba(247,210,80,0.9)]" src="/src/assets/services/ser2.png"/>
+                </div>
+              <h2 className="font-bold text-lg">سهولة الوصول والمشاركة</h2>
+              <p className="text-sm lg:max-w-[610px] lg:break-words">نوفّر لك رابطًا مخصصًا لموقعك يسهل عليك مشاركته مع عملائك ويمنحهم وصولًا مباشرًا وسريعًا إلى صفحتك دون أي تعقيد</p>
+              <div className=" flex flex-row justify-end mt-3">
+
+                <a className=" flex flex-row justify-between items-center py-1 px-5 rounded-full text-sm md:text-base transition cursor-pointer bg-[#DCB12E] hover:bg-[#bb9d5b] w-38 lg:w-35" href="####">
+                      <img className="w-6 h-5 lg:w-5 lg:h-4" src="/src/assets/Arrowbut.png" alt="" />
+                      <p className="lg:text-[13px] h-6.5 lg:h-6">اكتشف المزيد</p>
+                </a>
+              </div>
+
+            </div>
+      {/* ------------------------------------------------------------------------------------------------------------------------------- */}
+              <div className="p-1 flex flex-col gap-2">
+
+                <div className="flex flex-row justify-center lg:justify-end">
+              <img className="w-90 h-55 bg-white rounded-lg object-cover shadow-2xl hover:shadow-[0_0_12px_8px_rgba(247,210,80,0.9)]" src="/src/assets/services/ser3.png"/>
+                </div>
+
+              <h2 className="font-bold text-lg">مرونة في التحديث</h2>
+              <p className="text-sm lg:max-w-[610px] lg:break-words">قابلية التعديل المستمر على موقعك لضمان تحديث المحتوى بسهولة، ومواكبة كل جديد في شركتك أو خدماتك بدون أي تعقيد</p>
+              
+              <div className=" flex flex-row justify-end mt-3">
+                <a className=" flex flex-row justify-between items-center py-1 px-5 rounded-full text-sm md:text-base transition cursor-pointer bg-[#DCB12E] hover:bg-[#bb9d5b] w-38 lg:w-35" href="####">
+                      <img className="w-6 h-5 lg:w-5 lg:h-4 " src="/src/assets/Arrowbut.png" alt="" />
+                      <p className="lg:text-[13px] h-6.5 lg:h-6">اكتشف المزيد</p>
+                </a>
+              </div>
+
+            </div>
+
+      {/* ------------------------------------------------------------------------------------------------------------------------------- */} 
+
+            
+          </div>
+    </section>
+  );
+};
+
+export default ServicesSection2;
+
+
+      // <h2 className="font-bold text-lg" className={`text-3xl md:text-5xl font-medium text-center mb-10 md:mb-16 ${sectionTitleColor}`}>
+      //    className="text-sm"{sectionTitle}
+      // </h2>
+
+      // <div className={`flex gap-5 overflow-x-auto no-scrollbar py-17 px-2 text-center`} >
+      //   {list.map((service, index) => (
+      //     <ServiceCard2
+      //       key={index}
+      //       image={service.image}
+      //       icon={service.icon}
+      //       text={service.text}
+      //     />
+      //   ))}
+      // </div>

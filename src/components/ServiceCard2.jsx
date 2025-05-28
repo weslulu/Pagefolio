@@ -1,4 +1,4 @@
-const ServiceCard = ({ image, icon, text }) => {
+const ServiceCard2 = ({ image, icon, text }) => {
   return (
     <div className="relative min-w-[380px] bg-[#ffffff] rounded-md shadow-md overflow-visible">
       <img
@@ -14,4 +14,4 @@ const ServiceCard = ({ image, icon, text }) => {
   );
 };
 
-export default ServiceCard;
+export default ServiceCard2;
