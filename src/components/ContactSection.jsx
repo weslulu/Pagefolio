@@ -1,6 +1,6 @@
 // src/sections/ContactSection.jsx
 
-import companyData from "/companyData.js";
+import { companyData } from '../data/companyData.js';
 
 const {
   mapImage,

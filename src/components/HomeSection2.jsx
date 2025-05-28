@@ -1,4 +1,6 @@
-import companyData from "/companyData.js";
+// import companyData from "../data/companyData";
+import { companyData } from '../data/companyData.js';
+
 import Navbar from "/src/components/Navbar";
 
 
@@ -34,7 +36,7 @@ const Hero = () => {
         </p>
 
         {/* زر الجوال فقط */}
-        <div className>
+        <div>
           <button
             className={` shadow-lg drop-shadow-md px-10 py-2 rounded-lg text-md lg:text-2xl font-bold transition mt-2 md:mt-0 cursor-pointer ${hero2.buttonBg}  ${hero2.buttonTextColor} ${hero2.buttonHover}`}> <span className="drop-shadow-xl">{hero2.textbutton}</span>
           </button>

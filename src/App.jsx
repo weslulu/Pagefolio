@@ -15,7 +15,7 @@ import FooterSection from "./components/FooterSection";
 import ClientsSection from "./components/ClientsSection";
 import './index.css';
 
-import companyData from "/companyData.js";
+import { companyData } from '/src/data/companyData.js';
 
 
 

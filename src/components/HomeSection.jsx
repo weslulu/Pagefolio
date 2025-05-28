@@ -1,4 +1,4 @@
-import companyData from "/companyData.js";
+import companyData from "../data/companyData";
 import Navbar from "/src/components/Navbar";
 
 

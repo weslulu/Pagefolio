@@ -1,4 +1,4 @@
-import companyData from "/companyData.js";
+import { companyData } from '../data/companyData.js';
 
 const ClientsSection = () => {
   const {
