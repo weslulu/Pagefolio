@@ -8,6 +8,9 @@ export default defineConfig({
   base: './', // إزالة المسار المطلق
   build: {
     outDir: 'dist',
-    assetsDir: 'assets'
+    assetsDir: 'assets',
+    rollupOptions: {
+      external: ['@rollup/rollup-linux-x64-gnu']
+    }
   }
 })
