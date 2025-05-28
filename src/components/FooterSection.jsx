@@ -1,4 +1,4 @@
-import companyData from "../data/companyData";
+import companyData from "/companyData.js";
 
 const SiteFooter = () => {
   const {

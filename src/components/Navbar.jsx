@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 
-import companyData from "../data/companyData";
+import companyData from "/companyData.js";
 
 const Navbar = () => {
   const {

@@ -1,5 +1,5 @@
 import GoalItem2 from './GoalItem2';
-import companyData from '../data/companyData';
+import companyData from "/companyData.js";
 
 const GoalsSection = () => {
   const {
