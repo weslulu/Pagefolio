@@ -62,11 +62,13 @@ function App() {
       </div>
 
       <div id="" className="w-full">
-        <Feedback />
+        {/* <Feedback /> */}
+        <Feedback2 />
       </div>
 
        <div id="" className="w-full">
-        <SpecialEmploy />
+        {/* <SpecialEmploy /> */}
+        <SpecialEmp2 />
       </div>
 
       <div id="contact" className="w-full ">
