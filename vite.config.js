@@ -4,13 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  base: './', // إزالة المسار المطلق
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    rollupOptions: {
-      external: ['@rollup/rollup-linux-x64-gnu']
-    }
-  }
+  plugins: [
+
+    tailwindcss(),
+    react()
+
+  ],
 })
