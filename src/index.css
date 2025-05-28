@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 html {
   scroll-behavior: smooth;
@@ -34,4 +34,3 @@ html {
 .animate-marquee-right {
   animation: marquee-right 60s linear infinite;
 }
-
