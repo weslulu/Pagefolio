@@ -60,13 +60,21 @@ function App() {
       <div id="clients" className="w-full ">
         <ClientsSection />
       </div>
-
+{/*
       <div id="" className="w-full">
         <Feedback />
       </div>
 
        <div id="" className="w-full">
         <SpecialEmploy />
+      </div>
+   */}    
+             <div id="" className="w-full">
+        <Feedback2 />
+      </div>
+
+       <div id="" className="w-full">
+        <SpecialEmp2 />
       </div>
 
       <div id="contact" className="w-full ">

@@ -16,7 +16,7 @@ function SpecialEmploy() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % employees.length);
-    }, 13000); // Change employee every 10 seconds
+    }, 13000); // Change employee every 13 seconds
     return () => clearInterval(interval);
   }, [employees.length]);
 
