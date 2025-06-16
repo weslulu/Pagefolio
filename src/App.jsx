@@ -15,7 +15,7 @@ import FooterSection from "./components/FooterSection";
 import ClientsSection from "./components/ClientsSection";
 import './index.css';
 
-import companyData from "/src/data/companyData";
+import { companyData } from '/src/data/companyData.js';
 
 
 
@@ -62,11 +62,13 @@ function App() {
       </div>
 {/*
       <div id="" className="w-full">
-        <Feedback />
+        {/* <Feedback /> */}
+        <Feedback2 />
       </div>
 
        <div id="" className="w-full">
-        <SpecialEmploy />
+        {/* <SpecialEmploy /> */}
+        <SpecialEmp2 />
       </div>
    */}    
              <div id="" className="w-full">

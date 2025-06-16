@@ -1,5 +1,5 @@
 import ServiceCard from "./ServiceCard";
-import companyData from "../data/companyData";
+import { companyData } from '../data/companyData.js';
 
 const ServicesSection = () => {
   const { sectionTitle, sectionTitleColor, background, list } = companyData.services;

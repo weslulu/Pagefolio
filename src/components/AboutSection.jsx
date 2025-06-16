@@ -1,4 +1,4 @@
-import companyData from "../data/companyData";
+import { companyData } from '../data/companyData.js';
 
 const AboutPage = () => {
   const { title, titleColor, logo, paragraphs } = companyData.about;

@@ -1,6 +1,6 @@
 // src/data/companyData.js
 
-const companyData = {
+export const companyData = {
   fontFamily: "Cairo",
 
   
