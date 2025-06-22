@@ -24,6 +24,8 @@ import SpecialEmploy from './SpecialEmploy.jsx'
 import Feedback from './Feedback.jsx'
 import Feedback2 from "./Seconde_Template/Feedback2.jsx";
 import SpecialEmp2 from "./Seconde_Template/SpecialEmp2.jsx";
+import ContactSection2 from "./components/ContactSection2.jsx";
+import ClientsSection2 from "./components/ClientSection2.jsx";
 
 function App() {
 
@@ -56,12 +58,16 @@ function App() {
 
       </div>
 
-      
+{/*       
       <div id="clients" className="w-full ">
         <ClientsSection />
+      </div> */}
+
+      <div id="clients" className="w-full ">
+        <ClientsSection2 />
       </div>
-{/*
-      <div id="" className="w-full">
+
+       <div id="" className="w-full">
         {/* <Feedback /> */}
         <Feedback2 />
       </div>
@@ -70,17 +76,10 @@ function App() {
         {/* <SpecialEmploy /> */}
         <SpecialEmp2 />
       </div>
-   */}    
-             <div id="" className="w-full">
-        <Feedback2 />
-      </div>
-
-       <div id="" className="w-full">
-        <SpecialEmp2 />
-      </div>
+      
 
       <div id="contact" className="w-full ">
-        <ContactSection />
+        <ContactSection2 />
         <FooterSection />
       </div>
 

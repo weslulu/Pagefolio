@@ -289,7 +289,7 @@ goalsSection2: {
   titleColor: "text-[#1F5374]",
   titleSize: "text-3xl md:text-5xl",
 
-  paragraph: "يرحب هباب بكل عملائنا ونحن نفتخر بكوننا جزء منكم",
+  paragraph: "يرحب هباب بكل عملائنا و نفتخر بكوننا جزء منكم",
   paragraphColor: "text-gray-700",
   paragraphSize: "text-[14px] md:text-lg",
 
@@ -305,6 +305,24 @@ goalsSection2: {
 },
 
 
+  clientsSection2: {
+  title: "عمــــــلاء تشرفنــــــا بالعمــــــل معهــــــم ",
+  titleColor: "text-[#0A5A7D]",
+  titleSize: "text-3xl md:text-5xl",
+
+  paragraph: "يرحب هباب بكل عملائنا و نفتخر بكوننا جزء منكم",
+  paragraphColor: "text-gray-700",
+  paragraphSize: "text-[14px] md:text-lg",
+
+  logoHeight: "md:h-20 h-20",
+
+  logos: [
+    "/src/assets/company/techwin.png",
+    "/src/assets/company/umm al-qura.png",
+    "/src/assets/company/Logohbab.png",
+    
+  ],
+},
 
 
 contactSection: {
@@ -322,6 +340,27 @@ contactSection: {
   paragraphSize: "text-sm md:text-base",
 
   background: "bg-no-repeat bg-gradient-to-r from-[#FFEB9A] via-[#D9AE28] to-[#E0AA25]",
+},
+
+
+contactSection2: {
+  flagImage: "/src/assets/flag2.png",
+  title: "قم بزيارتنا للوصول وانضم الينا",
+  titleColor: "text-white",
+  titleSize: "text-3xl md:text-4xl",
+  background: "bg-no-repeat bg-gradient-to-r from-[#FFEB9A] via-[#D9AE28] to-[#E0AA25]",
+  maps: [
+    {
+      city: "جدة",
+      image: "/src/assets/Map2.png",
+      link: "https://maps.google.com/?q=21.3891,39.8579",
+    },
+    {
+      city: "مكة المكرمة",
+      image: "/src/assets/Map2.png",
+      link: "https://maps.google.com/?q=21.3891,39.8579",
+    },
+  ],
 },
 
 

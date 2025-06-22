@@ -34,3 +34,14 @@ html {
 .animate-marquee-right {
   animation: marquee-right 60s linear infinite;
 }
+
+{/* هذا لواجهة البارتنرز الثانيه */}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
