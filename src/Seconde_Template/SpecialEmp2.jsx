@@ -59,7 +59,7 @@ const EmployeeSlider = () => {
           {visibleEmployees.map((employee) => (
             <div
               key={employee.name}
-              className="relative w-56 sm:w-75 h-75 group rounded-[20px] overflow-hidden shadow-md shrink-0"
+              className="relative w-69 sm:w-75 h-75 group rounded-[20px] overflow-hidden shadow-md shrink-0"
             >
               <img
                 src={`./src/assets/images/${employee.image}`}
@@ -68,7 +68,7 @@ const EmployeeSlider = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#1C2756] to-transparent opacity-90 z-10"></div>
 
-              <div className="absolute inset-0 flex items-center justify-center text-white text-base sm:text-2xl  font-bold z-20 text-center px-2 py-45">
+              <div className="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-2xl  font-bold z-20 text-center px-2 py-45">
                 {employee.name}
               </div>
 

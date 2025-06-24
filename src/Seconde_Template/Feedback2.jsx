@@ -22,58 +22,62 @@ function Feedback2() {
   const currentReview = reviews[currentIndex];
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between py-30 gap-6 mr-10 ml-35">
-      
-      <div className="w-full md:w-1/2 flex items-center justify-center relative min-h-[290px]">
-        <h1 className="text-4xl  font-bold text-[#3A3A3A] z-10 text-center">
-         وش قالــوا  عـن هبـــّــــاب؟
+    <div className="relative flex flex-col lg:flex-row-reverse items-center mb-10 lg:justify-between lg:px-60">
+
+      {/* العنوان */}
+      <div className="w-full flex justify-center items-center">
+        {/* نص اللارج  */}
+        <h1 className="hidden lg:block text-4xl font-medium text-[#08445e] pb-8 text-right leading-snug whitespace-pre-line">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'وش قالــوا'} {' \nعن هبـــّــــاب؟'} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </h1>
-        
-        {/* الأيقونات الخلفية */}
-        <img src="src/assets/icons/cloud.png" alt="icon" className="w-35 h-19 absolute top-3 left-5 opacity-60" />
-        <img src="src/assets/icons/idea.png" alt="icon" className="w-20 h-30 absolute top-5 right-2 opacity-60 " />
-        <img src="src/assets/icons/light.png" alt="icon" className="w-14 h-38 absolute bottom-0 left-0 opacity-60" />
-        <img src="src/assets/icons/handOstars.png" alt="icon" className="w-20 h-23 absolute bottom-5 right-9 opacity-60 " />
+
+        {/* نص الميديم والسمول */}
+        <h1 className="block lg:hidden text-4xl font-medium text-[#08445e] pb-8 text-center leading-snug">
+          وش قالــوا عـن هبـــّــــاب؟
+        </h1>
       </div>
 
-      {/* القسم الأيمن */}
-      <div className="w-full md:w-1/2 max-w-lg flex flex-col items-center relative">
-        <div className="relative ml-7 w-full h-[395px] transition-all duration-500 overflow-visible">
+      {/* الكونتينر حق الكرت كامل */}
+      <div className="relative w-full h-[400px] flex items-center justify-center">
+        {/* الكروت اللي ورا */}
+        <div className="absolute w-[320px] h-full bg-[#0D6C95] rounded-lg shadow-lg transform rotate-[7deg] scale-95 z-0 opacity-30"></div>
+        <div className="absolute w-[320px] h-full bg-[#0D6C95] rounded-lg shadow-lg transform rotate-[-10deg] scale-95 z-0 opacity-60"></div>
 
-{/* الكروت الخلفية الوهمية بشكل أنيق خلف الكرت */} 
-<div className="absolute top-4 left-1 w-85 h-full bg-[#0D6C95] rounded-lg shadow-lg transform rotate-[7deg] scale-95 z-0 opacity-30"></div>
-<div className="absolute top-3 left-2 w-84 h-97 bg-[#0D6C95] rounded-lg shadow-lg transform rotate-[-10deg] scale-[0.97] z-0 opacity-60"></div>
-
-
-          {/* الكرت الفعلي */}
-          {currentReview && (
-            <div key={currentReview.id} className="relative z-10 w-full h-full">
-              <div className="bg-[#126b8d] text-white w-75  mt-6 ml-7 mr-7 rounded-lg shadow-xl flex flex-col justify-between h-full ">
-                <div>
-                  <div className="mt-7 ml-5 text-xl font-bold">
-                    ⭐ {currentReview.rating} <span className="text-xs align-bottom font-light">(التقييم من 5)</span>
-                  </div>
-                  <p className="mt-8 mr-9 ml-9 text-md text-right font-medium leading-relaxed">{currentReview.comment}</p>
+        {/* الكرت اللي قدام */}
+        {currentReview && (
+          <div key={currentReview.id} className="relative z-10 w-[295px] h-full">
+            <div className="bg-[#126b8d] text-white rounded-lg shadow-xl flex flex-col justify-between h-full">
+              <div>
+                <div className="mt-7 ml-5 text-xl font-bold">
+                  ⭐ {currentReview.rating}
+                  <span className="absolute text-xs ml-2 mt-3 font-light">(التقييم من 5)</span>
                 </div>
-                <div className=" flex justify-start items-center flex-row-reverse gap-3 bg-[#FFE065] px-4 py-3  rounded-b-lg ">
-                  <img
-                    src={`src/assets/images/Screenshot 2025-05-18 110353.png`}
-                    alt={currentReview.name}
-                    className="w-8 h-8 rounded-full object-cover"
-                  />
-                  <span className="text-lg text-[#0A5A7D]  font-bold">{currentReview.name}</span>
-                </div>
+                <p className="mt-8 mx-6 text-md text-right font-medium leading-relaxed">
+                  {currentReview.comment}
+                </p>
+              </div>
+              <div className="flex items-center justify-start flex-row-reverse gap-3 bg-[#FFE065] px-4 py-3 rounded-b-lg">
+                <img
+                  src={`src/assets/images/Screenshot 2025-05-18 110353.png`}
+                  alt={currentReview.name}
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+                <span className="text-lg text-[#0A5A7D] font-bold">
+                  {currentReview.name}
+                </span>
               </div>
             </div>
-          )}
-        </div>
 
-        {/* أزرار التنقل */}
-        <div className="flex items-center justify-center gap-6 mt-9">
-          <button onClick={handlePrev} className="text-3xl text-[#0A5A7D] hover:text-blue-500 mt-5 absolute  -translate-x-30 ">←</button>
-          <span className="text-sm  absolute  -translate-x-13 mt-5 text-gray-600">{currentIndex + 1} / {reviews.length}</span>
-          <button onClick={handleNext} className="text-3xl text-[#0A5A7D] hover:text-blue-500 mt-5 absolute  left-1/2 transform">→</button>
-        </div>
+            {/* الأسهم */}
+            <div className="relative w-full h-[60px] mt-4">
+              <div className="absolute inset-0 flex items-center justify-between px-4">
+                <button onClick={handlePrev} className="text-3xl text-[#0A5A7D] hover:text-blue-500">←</button>
+                <span className="text-sm text-gray-600">{currentIndex + 1} / {reviews.length}</span>
+                <button onClick={handleNext} className="text-3xl text-[#0A5A7D] hover:text-blue-500">→</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
