@@ -22,10 +22,10 @@ function Feedback2() {
   const currentReview = reviews[currentIndex];
 
   return (
-    <div className="relative flex flex-col lg:flex-row-reverse items-center mb-10 lg:justify-between lg:px-60">
+    <div className="relative flex flex-col lg:flex-row-reverse items-center mb-10 lg:justify-between lg:px-55">
 
       {/* العنوان */}
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full flex justify-center ml-10 items-center">
         {/* نص اللارج  */}
         <h1 className="hidden lg:block text-4xl font-medium text-[#08445e] pb-8 text-right leading-snug whitespace-pre-line">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'وش قالــوا'} {' \nعن هبـــّــــاب؟'} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -38,7 +38,7 @@ function Feedback2() {
       </div>
 
       {/* الكونتينر حق الكرت كامل */}
-      <div className="relative w-full h-[400px] flex items-center justify-center">
+      <div className="relative w-full ml-10 h-[400px] flex items-center  justify-center">
         {/* الكروت اللي ورا */}
         <div className="absolute w-[320px] h-full bg-[#0D6C95] rounded-lg shadow-lg transform rotate-[7deg] scale-95 z-0 opacity-30"></div>
         <div className="absolute w-[320px] h-full bg-[#0D6C95] rounded-lg shadow-lg transform rotate-[-10deg] scale-95 z-0 opacity-60"></div>
