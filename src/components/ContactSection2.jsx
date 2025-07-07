@@ -9,6 +9,14 @@ const {
 } = companyData.contactSection2;
 
 const ContactSection2 = () => {
+  
+
+
+
+
+
+
+
   return (
     <section>
       {/* صورة الزخرفة */}

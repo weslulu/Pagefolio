@@ -33,7 +33,7 @@ export const companyData = {
     subtitle: "الريح التقنية اللي تدخل على صفحات شركتك، وتحركها، وتعدلها، وتعيد تشكيلها من جديد بدون ما تلمس سطر كود",
     gifImage: "/src/assets/gif.gif",
     flagImage: "/src/assets/Flag.png",
-    background: "bg-gradient-to-r from-[#70cbf3] via-[#12A3E3] to-[#0A5A7D]",
+    background: "bg-gradient-to-r from-[#0f172a] via-[#0f172a] to-[#0f172a]",
     titleColor: "text-white",
     subtitleColor: "text-white",
     buttonBg: "bg-[#DCB12E]",
