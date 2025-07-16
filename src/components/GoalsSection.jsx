@@ -37,72 +37,48 @@
 
 // export default GoalsSection;
 
-
-import { useEffect, useState } from 'react';
+import { useDesign } from '../Context/DesignContext.jsx'; // استيراد الكونتكس
 import GoalItem from './GoalItem';
-import { getCompanyInfo } from '../Api/companiesAPI';
+import AnimatedSection from '../AnimatedSection.jsx';
 
 const GoalsSection = () => {
-  const [goalsData, setGoalsData] = useState(null);
+  const { designData, loading } = useDesign();
 
-  useEffect(() => {
-    getCompanyInfo()
-      .then((res) => {
-        const pages = res.data?.data;
-        if (!pages || pages.length === 0) return;
-
-        const layout1Page = pages.find((page) => page.layout === "1");
-        if (!layout1Page) return;
-
-        const section = layout1Page.sections?.[0];
-        const objectiveSection = section?.objective_title;
-        if (!objectiveSection) return;
-
-        setGoalsData({
-          title: objectiveSection.section_name,
-          background: layout1Page.theme_color1,
-          background2: layout1Page.text_color2,
-          titleColor: layout1Page.text_color1,
-          itemTitleColor: layout1Page.text_color2,
-          goals: objectiveSection.objectives
-        });
-      })
-      .catch((err) => {
-        console.error("فشل في جلب بيانات الأهداف", err);
-      });
-  }, []);
-
-  if (!goalsData) return <div>جاري تحميل الأهداف...</div>;
+  if (loading || !designData) return <div>جاري تحميل الأهداف...</div>;
 
   const {
-    title,
-    background,
-    background2,
-    titleColor,
-    itemTitleColor,
-    goals
-  } = goalsData;
+    textColor1: titleColor,
+    textColor2: itemTitleColor,
+    themeColor1: background,
+    textColor2: background2, // لو حاب تستخدمها داخل كل بطاقة
+    sections,
+  } = designData;
+
+  const goalsData = sections.objectives.items;
 
   return (
-    <section className="px-12 py-20 lg:px-30 text-right" style={{ backgroundColor: background }}>
-      <div className="mx-auto">
-        <h2 className={`text-5xl font-bold mb-15 text-center`} style={{ color: titleColor }}>
-          {title}
-        </h2>
-        <div className="flex flex-wrap justify-center gap-5">
-          {goals.map((goal, index) => (
-            <div key={index} className="w-full md:w-[48%]">
-              <GoalItem
-                iconSrc={`http://68.183.28.116/storage/${encodeURI(goal.icon.icon_url)}`}
-                title={goal.content}
-                titleColor={itemTitleColor}
-                titleSize="text-lg"
-                background2={background2} 
-              />
-            </div>
-          ))}
+    <section className="px-12 py-25 lg:px-30 text-right" style={{ backgroundColor: background }}>
+      <AnimatedSection>
+        <div className="mx-auto">
+          <h2 className="text-5xl font-bold mb-15 text-center" style={{ color: titleColor }}>
+            {sections.objectives.section_name}
+          </h2>
+
+          <div className="flex flex-wrap justify-center gap-5">
+            {goalsData.map((goal, index) => (
+              <div key={index} className="w-full md:w-[48%]">
+                <GoalItem
+                  iconSrc={goal.icon}
+                  title={goal.text}
+                  titleColor={background}
+                  titleSize="text-lg"
+                  background2={background2}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   );
 };

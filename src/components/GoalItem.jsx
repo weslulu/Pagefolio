@@ -7,7 +7,7 @@ const GoalItem = ({ iconSrc, title, background2, titleColor, titleSize }) => {
         alt="goal icon"
         className="w-18 h-16 md:w-20 md:h-20 sm:w-10 sm:h-10"
       />
-      <p className={`${titleSize} font-bold ${titleColor}`}>{title}</p>
+      <p className=" font-bold " style={{color:titleColor,titleSize}}>{title}</p>
     </div>
   );
 };

@@ -44,7 +44,7 @@ const ContactSection2 = () => {
                     className="w-full h-50 sm:h-60 md:h-64 object-cover"
                   />
                 </a>
-                <div className="text-right py-3 px-8 text-lg md:text-2xl sm:text-2xl font-bold text-[#0A5A7D]">
+                <div className="text-right py-3 px-8 text-md md:text-2xl sm:text-2xl font-bold text-[#0A5A7D]">
                   {map.city}
                 </div>
               </div>

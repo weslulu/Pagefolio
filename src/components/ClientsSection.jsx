@@ -65,102 +65,88 @@
 
 // export default ClientsSection;
 
-import { useEffect, useState } from 'react';
-import { getCompanyInfo } from '../Api/companiesAPI';
+
+import { useDesign } from '../Context/DesignContext.jsx';
+import AnimatedSection from '../AnimatedSection.jsx';
 
 const ClientsSection = () => {
-  const [title, setTitle] = useState('');
-  const [paragraph, setParagraph] = useState('');
-  const [logos, setLogos] = useState([]);
-  const [themeColor1, setThemeColor1] = useState('#ffffff');
-  const [themeColor2, setThemeColor2] = useState('#cccccc');
-  const [textColor1, setTextColor1] = useState('#000000');
- const [textColor2, setTextColor2] = useState('#111111');
-  useEffect(() => {
-    getCompanyInfo()
-      .then((res) => {
-        const page = res.data?.data?.[0];
-        const partnerTitle = page?.sections?.[0]?.partner_title;
+  const { designData, loading } = useDesign();
 
-        if (partnerTitle) {
-          setTitle(partnerTitle.section_name);
-          setParagraph(partnerTitle.sub_title);
-          const logoUrls = partnerTitle.partners?.map(
-            (partner) => `http://68.183.28.116/storage/${partner.image.image_url}`
-          );
-          setLogos(logoUrls || []);
-        }
+  if (loading || !designData) return <div>جاري تحميل العملاء...</div>;
 
-        setThemeColor1(page?.theme_color1 || '#ffffff');
-        setThemeColor2(page?.theme_color2 || '#cccccc');
-        setTextColor1(page?.text_color1 || '#000000');
-        setTextColor2(page?.text_color2 || '#000000');
-      })
-      .catch((err) => {
-        console.error('فشل جلب بيانات العملاء:', err);
-      });
-  }, []);
+  const {
+    themeColor1,
+    textColor1,
+    textColor2,
+    sections,
+  } = designData;
 
-  const duplicatedLogos = Array(17).fill(logos).flat();
+const { partners } = sections;
+
+const logos = partners.list.map((partner) => partner.image);
+const duplicatedLogos = Array(17).fill(logos).flat();
 
   return (
     <section
-      className="relative py-20 overflow-hidden"
+      className="relative py-28 overflow-hidden"
       style={{ backgroundColor: themeColor1 }}
     >
-      <h2
-        className="text-3xl font-bold md:mb-4 mb-2 text-center"
-        style={{ color: textColor1 }}
-      >
-        {title}
-      </h2>
-      <p
-        className="text-lg mb-15 text-center"
-        style={{ color: textColor2 }}
-      >
-        {paragraph}
-      </p>
+      <AnimatedSection>
+        <h2
+          className="text-3xl md:text-5xl font-bold md:mb-4 mb-2 text-center"
+          style={{ color: textColor1 }}
+        >
+          {partners.title || "شركاؤنا"}
+        </h2>
 
-      {/* صف علوي */}
-      <div className="overflow-hidden">
-        <div
-          className="absolute left-[-20px] top-43 md:h-[320px] md:w-24 h-[245px] w-14 blur-sm z-10"
-          style={{
-            background: `linear-gradient(to right, ${themeColor1}, transparent)`
-          }}
-        />
-        <div
-          className="absolute right-[-20px] top-43 md:h-[320px] md:w-24 h-[245px] w-12 blur-sm z-10"
-          style={{
-            background: `linear-gradient(to left, ${themeColor1}, transparent)`
-          }}
-        />
+        <p
+          className="text-lg mb-15 text-center"
+          style={{ color: textColor2 }}
+        >
+          {partners.subtitle || "نفتخر بثقة شركائنا"} {/* إذا ما أرسلوا subtitle */}
+        </p>
 
-        <div className="marquee-container flex gap-12 animate-marquee-left">
-          {duplicatedLogos.map((logo, index) => (
-            <img
-              key={`top-${index}`}
-              src={logo}
-              className="h-22 w-auto object-contain"
-              alt={`logo-${index}`}
-            />
-          ))}
+        {/* صف علوي */}
+        <div className="overflow-hidden">
+          <div
+            className="absolute left-[-20px] top-43 md:h-[320px] md:w-24 h-[245px] w-14 blur-sm z-10"
+            style={{
+              background: `linear-gradient(to right, ${themeColor1}, transparent)`,
+            }}
+          />
+          <div
+            className="absolute right-[-20px] top-43 md:h-[320px] md:w-24 h-[245px] w-12 blur-sm z-10"
+            style={{
+              background: `linear-gradient(to left, ${themeColor1}, transparent)`,
+            }}
+          />
+
+          <div className="marquee-container flex gap-12 animate-marquee-left">
+            {duplicatedLogos.map((logo, index) => (
+              <img
+                key={`top-${index}`}
+                src={logo}
+                className="h-22 w-auto object-contain"
+                alt={`logo-${index}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* صف سفلي */}
-      <div className="overflow-hidden mt-12">
-        <div className="marquee-container flex gap-12 animate-marquee-right">
-          {duplicatedLogos.map((logo, index) => (
-            <img
-              key={`bottom-${index}`}
-              src={logo}
-              className="h-22 w-auto object-contain"
-              alt={`logo-${index}`}
-            />
-          ))}
+        {/* صف سفلي */}
+        <div className="overflow-hidden mt-12">
+          <div className="marquee-container flex gap-12 animate-marquee-right">
+            {duplicatedLogos.map((logo, index) => (
+              <img
+                key={`bottom-${index}`}
+                src={logo}
+                className="h-22 w-auto object-contain"
+                alt={`logo-${index}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   );
 };

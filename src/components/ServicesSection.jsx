@@ -25,67 +25,45 @@
 
 // export default ServicesSection;
 
-
-import { useState, useEffect } from "react";
+import { useDesign } from "../Context/DesignContext.jsx";
 import ServiceCard from "./ServiceCard";
-import { getCompanyInfo } from "../Api/companiesAPI.js";
+import AnimatedSection from "../AnimatedSection.jsx";
 
 const ServicesSection = () => {
-  const [servicesData, setServicesData] = useState({
-    sectionTitle: "",
-    backgroundColor: "",
-    titleColor: "",
-    services: [],
-  });
+  const { designData, loading } = useDesign();
 
-  useEffect(() => {
-    getCompanyInfo()
-      .then((response) => {
-        const page = response.data.data[0];
-        const serviceSection = page.sections[0].service_title;
+  if (loading || !designData) return null;
 
-        const sectionTitle = serviceSection.section_name;
-        const titleColor = page.text_color1;
-        const backgroundColor = page.theme_color1;
+  const {
+    textColor1: titleColor,
+    themeColor1: backgroundColor,
+    sections,
+  } = designData;
 
-        const services = serviceSection.services.map((service) => ({
-          text: service.content,
-          image: `http://68.183.28.116/storage/${service.image.image_url}`,
-        }));
+  const servicesSection = sections.services;
 
-        setServicesData({
-          sectionTitle,
-          backgroundColor,
-          titleColor,
-          services,
-        });
-      })
-      .catch((error) => console.error("Error fetching services data:", error));
-  }, []);
-
-  const { sectionTitle, backgroundColor, titleColor, services } = servicesData;
-
-  if (!services.length) return null;
+  if (!servicesSection || !servicesSection.items.length) return null;
 
   return (
     <section style={{ backgroundColor }}>
-  <h2
-    className="text-3xl md:text-5xl font-bold text-center mb-10 md:mb-16"
-    style={{ color: titleColor }}
-  >
-    {sectionTitle}
-  </h2>
+      <AnimatedSection>
+        <h2
+          className="text-3xl md:text-5xl font-bold text-center mb-10 md:mb-1"
+          style={{ color: titleColor }}
+        >
+          {servicesSection.section_name}
+        </h2>
 
-  <div
-    className="flex gap-5 overflow-x-auto no-scrollbar py-17 px-2 text-center"
-    dir="rtl"
-  >
-    {services.map((service, index) => (
-      <ServiceCard key={index} image={service.image} text={service.text} />
-    ))}
-  </div>
-</section>
-
+        <div
+          className="flex gap-5 overflow-x-auto no-scrollbar py-17 px-2 text-center"
+          dir="rtl"
+        >
+          {servicesSection.items.map((service, index) => (
+            <ServiceCard key={index} image={service.image} text={service.text} />
+          ))}
+        </div>
+      </AnimatedSection>
+    </section>
   );
 };
 

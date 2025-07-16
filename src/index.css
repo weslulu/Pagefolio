@@ -1,4 +1,11 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap');
+
+body {
+  font-family: 'Readex Pro', sans-serif;
+}
+
+
 
 html {
   scroll-behavior: smooth;
@@ -35,7 +42,7 @@ html {
   animation: marquee-right 60s linear infinite;
 }
 
-{/* هذا لواجهة البارتنرز الثانيه */}
+/* {هذا لواجهة البارتنرز الثانيه} */
 
 @keyframes scroll {
   0% { transform: translateX(0); }
@@ -45,5 +52,6 @@ html {
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
 
 

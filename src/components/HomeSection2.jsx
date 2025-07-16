@@ -1,7 +1,6 @@
 // import companyData from "../data/companyData";
 import { companyData } from '../data/companyData.js';
 
-import Navbar from "/src/components/Navbar";
 
 
 const Hero = () => {
@@ -13,10 +12,6 @@ const Hero = () => {
 <div className="h-full bg-[url('/src/assets/comp.jpg')] bg-cover bg-center bg-no-repeat">
 
         <div className="absolute inset-0 bg-black opacity-50"></div>
-
-  <div className="relative z-10">
-    <Navbar />
-  </div>
 
       <section className={" w-full px-10 md:px-20 py-40 flex flex-col items-center lg:justify-center gap-10 overflow-hidden content-center relative"} style={{ fontFamily }}>
 

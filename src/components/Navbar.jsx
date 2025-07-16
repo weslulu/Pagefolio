@@ -62,47 +62,13 @@
 // export default Navbar;
 
 
-import { useEffect, useState } from 'react';
-import { getCompanyInfo } from '../Api/companiesAPI';
+
+import { useDesign } from '../Context/DesignContext';
 
 const Navbar = () => {
-  const [navbarData, setNavbarData] = useState(null);
+  const { designData, loading } = useDesign();
 
-  useEffect(() => {
-    getCompanyInfo()
-      .then((res) => {
-        const pages = res.data.data; // مصفوفة الصفحات
-const layout1Page = pages.find((p) => p.layout === "1");
-if (!layout1Page) return;
-
-
-        const logo = `http://68.183.28.116/storage/${layout1Page.company.logo_url}`;
-
-        // تقدر تضبط الروابط والأزرار حسب بنية الـ backend لاحقًا
-        setNavbarData({
-          logo,
-          links: [
-  { name: layout1Page.sections[0].back_title.section_name, href: '#about' },
-  { name: layout1Page.sections[0].service_title.section_name, href: '#services' },
-  { name: layout1Page.sections[0].objective_title.section_name, href: '#objectives' },
-  { name: layout1Page.sections[0].partner_title.section_name, href: '#partners' },
-  { name: layout1Page.sections[0].location_title.section_name, href: '#locations' },
-],
-
-          createButtonText: 'أنشئ ملفك',
-          loginButtonText: 'تسجيل دخول',
-          createButtonBg: 'bg-yellow-400',
-          createButtonHover: 'hover:bg-yellow-500',
-          createButtonTextColor: 'text-black',
-          loginButtonTextColor: 'text-white',
-        });
-      })
-      .catch((err) => {
-        console.error('فشل في تحميل بيانات النافبار', err);
-      });
-  }, []);
-
-  if (!navbarData) {
+  if (loading || !designData?.sections) {
     return (
       <nav className="w-full bg-transparent py-6 text-center text-white">
         جاري التحميل...
@@ -112,34 +78,50 @@ if (!layout1Page) return;
 
   const {
     logo,
-    links,
-    createButtonText,
-    loginButtonText,
-    createButtonBg,
-    createButtonHover,
-    createButtonTextColor,
-    loginButtonTextColor,
-  } = navbarData;
+    textColor2,
+    textColor1,
+    themeColor1,
+    themeColor2,
+    sections,
+  } = designData;
+
+  const links = [
+    { name: sections.whoWeAre.section_name, href: '#about' },
+    { name: sections.services.section_name || 'خدماتنا', href: '#services' },
+    { name: sections.objectives.section_name || 'أهدافنا', href: '#objectives' },
+    { name: sections.partners.title || 'شركاؤنا', href: '#partners' },
+    { name: sections.location.section_name || 'موقعنا', href: '#locations' },
+  ];
+
+  const createButtonText = 'أنشئ ملفك';
+  const loginButtonText = 'تسجيل دخول';
 
   return (
-    <nav className="font-[Cairo] w-full bg-transparent">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 opacity-95 shadow-md backdrop-blur-md"
+      style={{ backgroundColor: themeColor1 }}
+    >
       <div className="flex flex-wrap items-center lg:justify-between px-4 py-4 md:px-20 justify-center">
-        {/* يمين الصفحة: الشعار + السكشنات */}
+
+        {/* الشعار والروابط */}
         <div className="flex flex-wrap justify-center items-center gap-6">
-          {/* الشعار */}
           <div>
             <img
               src={logo}
               alt="شعار"
-              className="w-27 h-10 md:w-27 md:h-10 sm:w-27 sm:h-10"
+              className="w-35 h-10 md:w-35 md:h-10 sm:w-35 sm:h-10"
             />
           </div>
 
-          {/* روابط السكشنات */}
-          <ul className="flex flex-wrap gap-3 justify-center lg:gap-6 text-white font-bold text-sm md:text-base">
+          <ul className="flex flex-wrap gap-3 justify-center lg:gap-6 font-bold text-sm md:text-base">
             {links.map((link, index) => (
-              <li key={index} className="cursor-pointer">
-                <a href={link.href} className="hover:text-amber-200">
+              <li key={index} className="cursor-pointer transition duration-300">
+                <a
+                  href={link.href}
+                  style={{ color: textColor2 }}
+                  onMouseEnter={(e) => (e.target.style.color = textColor1)}
+                  onMouseLeave={(e) => (e.target.style.color = textColor2)}
+                >
                   {link.name}
                 </a>
               </li>
@@ -147,19 +129,30 @@ if (!layout1Page) return;
           </ul>
         </div>
 
-        {/* يسار الصفحة: الأزرار */}
+        {/* الأزرار */}
         <div className="hidden md:flex items-center gap-3">
           <button
-            className={`px-4 py-1 rounded-full text-sm md:text-base transition cursor-pointer ${createButtonBg} ${createButtonHover} ${createButtonTextColor}`}
+            className="px-4 py-1 rounded-full text-sm md:text-base transition cursor-pointer"
+            style={{
+              backgroundColor: textColor1,
+              color: textColor2,
+            }}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = themeColor2)}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = textColor1)}
           >
             {createButtonText}
           </button>
+
           <button
-            className={`font-extrabold text-sm md:text-base cursor-pointer ${loginButtonTextColor}`}
+            className="font-extrabold text-sm md:text-base cursor-pointer transition"
+            style={{ color: textColor2 }}
+            onMouseEnter={(e) => (e.target.style.color = textColor1)}
+            onMouseLeave={(e) => (e.target.style.color = textColor2)}
           >
             {loginButtonText}
           </button>
         </div>
+
       </div>
     </nav>
   );
