@@ -104,13 +104,13 @@ const SiteFooter = () => {
     hoverColor: designData.textColor1,
     hoverBg: designData.textColor1,
     copyButton: {
-      bgColor: designData.textColor1,
+      bgColor: designData.textColor2,
       textColor: designData.themeColor1,
-      hoverBg: designData.textColor2
+      hoverBg: designData.textColor1
     },
     copyright: {
       text: `© ${new Date().getFullYear()} ${company.name} جميع الحقوق محفوظة.`,
-      bgColor: designData.textColor1
+      bgColor: designData.textColor2
     }
   };
 

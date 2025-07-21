@@ -70,7 +70,7 @@ const Navbar = () => {
 
   if (loading || !designData?.sections) {
     return (
-      <nav className="w-full bg-transparent py-6 text-center text-white">
+      <nav className="w-full bg-transparent py-6 text-center text-black">
         جاري التحميل...
       </nav>
     );

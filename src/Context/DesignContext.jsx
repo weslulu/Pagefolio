@@ -10,7 +10,7 @@ export const DesignProvider = ({ children }) => {
   useEffect(() => {
     getCompanyInfo()
       .then(res => {
-        const layout1Page = res.data.data.find(p => p.layout === "1");
+        const layout1Page = res.data.data.find(p => p.layout === "2");
         if (!layout1Page) return;
 
         const base = "http://68.183.28.116/storage/";
@@ -25,7 +25,7 @@ export const DesignProvider = ({ children }) => {
           textColor2: layout1Page.text_color2,
 
           // بيانات الشركة
-          logo: `${base}${company.logo_url}`,
+          logo: `${base}${company.header_photo}`,
           companyName: company.name,
           slogan: company.slogan,
           email: company.email,
@@ -38,12 +38,15 @@ export const DesignProvider = ({ children }) => {
               image: `${base}${sections.back_title?.background?.image?.image_url}`
             },
             services: {
-              section_name: sections.service_title?.section_name,
-              items: sections.service_title?.services?.map(s => ({
-                text: s.content,
-                image: `${base}${s.image.image_url}`
-              })) || []
-            },
+  section_name: sections.service_title?.section_name,
+  content: sections.service_title?.content,
+  items: sections.service_title?.services?.map(s => ({
+    title: s.title,
+    content: s.content,
+    image: `${base}${s.image.image_url}`
+  })) || []
+},
+
             objectives: {
               section_name: sections.objective_title?.section_name,
               items: sections.objective_title?.objectives?.map(o => ({
