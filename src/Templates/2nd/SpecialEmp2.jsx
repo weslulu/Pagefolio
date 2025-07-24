@@ -104,8 +104,8 @@
 // export default EmployeeSlider;
 
 import { useEffect, useState } from 'react';
-import { useDesign } from '../Context/DesignContext.jsx';
-import AnimatedSection from '../AnimatedSection.jsx'
+import { useDesign } from '../../Context/DesignContext.jsx';
+import AnimatedSection from '../../AnimatedSection.jsx'
 
 const EmployeeSlider = () => {
   const { designData, loading } = useDesign();

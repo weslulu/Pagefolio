@@ -66,8 +66,8 @@
 // export default ClientsSection;
 
 
-import { useDesign } from '../Context/DesignContext.jsx';
-import AnimatedSection from '../AnimatedSection.jsx';
+import { useDesign } from '../../Context/DesignContext.jsx';
+import AnimatedSection from '../../AnimatedSection.jsx';
 
 const ClientsSection = () => {
   const { designData, loading } = useDesign();
@@ -100,7 +100,7 @@ const duplicatedLogos = Array(17).fill(logos).flat();
         </h2>
 
         <p
-          className="text-lg mb-15 text-center"
+          className="text-xl mb-15 text-center font-medium"
           style={{ color: textColor2 }}
         >
           {partners.subtitle || "نفتخر بثقة شركائنا"} {/* إذا ما أرسلوا subtitle */}

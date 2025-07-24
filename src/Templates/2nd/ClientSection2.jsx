@@ -49,9 +49,9 @@
 
 // export default clientsSection2;
 
-import { useDesign } from '../Context/DesignContext.jsx';
-import '../App.css';
-import AnimatedSection from '../AnimatedSection.jsx'
+import { useDesign } from '../../Context/DesignContext';
+// import '../App.css';
+import AnimatedSection from '../../AnimatedSection'
 
 const ClientsSection2 = () => {
   const { designData, loading } = useDesign();

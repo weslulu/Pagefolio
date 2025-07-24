@@ -32,14 +32,12 @@
 
 // export default AboutPage;
 
-
-import AnimatedSection from '../AnimatedSection.jsx'; 
-
+import AnimatedSection from '../../AnimatedSection.jsx'; 
 import { Typewriter } from 'react-simple-typewriter';
-import { useDesign } from '../Context/DesignContext.jsx';
+import { useDesign } from '../../Context/DesignContext.jsx';
 
 const AboutPage = () => {
-  const { designData, loading } = useDesign();
+  const { designData, loading, language } = useDesign();
 
   if (loading || !designData) {
     return <div className="text-center py-20 text-gray-500 text-lg">بيتم التحميل...</div>;
@@ -55,39 +53,40 @@ const AboutPage = () => {
 
   const title = sections?.whoWeAre?.section_name;
   const paragraphText = sections?.whoWeAre?.text;
+  const isArabic = language === 'en';
 
   return (
     <section
-      className="relative px-10 md:px-15 py-30 flex flex-col-reverse lg:flex-row bg-gradient-to-b from-black to-transparent items-center content-center justify-center md:gap-10 md:justify-between"
+      className={`relative px-10 md:px-15 py-30 flex flex-col-reverse  lg:${isArabic ? 'flex-row-reverse' : 'flex-row'} items-center justify-center md:gap-10`}
       style={{
         fontFamily: fontFamily || 'inherit',
         backgroundColor: themeColor1,
       }}
     >
       {/* النصوص */}
-      <div className="w-full lg:w-3/2 text-center lg:text-right px-2 md:px-5 lg:px-0 md:leading-7 z-10">
-      <AnimatedSection>
-        <p
-          className="text-base md:text-xl lg:text-1xl md:leading-8 mb-3 md:mb-6"
-          style={{ color: textColor2 }}
-        >
-          <Typewriter
-            words={[paragraphText]}
-            typeSpeed={40}
-            deleteSpeed={0}
-            delaySpeed={10000}
-            cursor
-            cursorStyle="|"
-            loop={false}
-          />
-        </p>
+      <div className={`w-full lg:w-3/2 px-2 md:px-5 lg:px-0 z-10 text-${isArabic ? 'left' : 'right'}`} dir={isArabic ? 'rtl' : 'ltr'}>
+        <AnimatedSection>
+          <p
+            className="text-base md:text-xl lg:text-1xl md:leading-8 mb-3 md:mb-6"
+            style={{ color: textColor2 }}
+          >
+            <Typewriter
+              words={[paragraphText]}
+              typeSpeed={40}
+              deleteSpeed={0}
+              delaySpeed={10000}
+              cursor
+              cursorStyle="|"
+              loop={false}
+            />
+          </p>
         </AnimatedSection>
       </div>
 
       {/* العنوان */}
-      <div className="w-full lg:w-1/2 flex justify-center lg:justify-items-start mt-6 lg:mt-0 z-10">
+      <div className={`w-full lg:w-1/2 flex  text-${language === "ar" ? "right" : "left"} mt-6 lg:mt-0 z-10`}>
         <h1
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
+          className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-${isArabic ? 'right' : 'left'}`}
           style={{ color: textColor1 }}
         >
           {title}

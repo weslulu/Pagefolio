@@ -81,16 +81,16 @@
 
 // export default SiteFooter;
 
-
-import { useDesign } from '../Context/DesignContext';
+import { useDesign } from '../../Context/DesignContext';
 
 const SiteFooter = () => {
-  const { designData, loading } = useDesign();
+  const { designData, loading, language } = useDesign();
+  const isArabic = language === 'ar';
 
   if (loading || !designData) return null;
 
   const company = {
-    logo: designData.logo,
+    logoHeader: designData.logoHeader,
     slogan: designData.slogan,
     email: designData.sections?.location?.mapUrl?.includes("mailto:")
       ? designData.sections?.location?.mapUrl.replace("mailto:", "")
@@ -126,9 +126,9 @@ const SiteFooter = () => {
 
   return (
     <footer className="text-sm" style={{ backgroundColor: theme.backgroundColor, color: theme.textColor }}>
-      {/* الروابط العلوية */}
+      {/* روابط التنقل */}
       <div className="border-b mx-10 lg:mx-70">
-        <nav className="flex items-center justify-center gap-5 lg:gap-8 py-6 flex-wrap">
+        <nav className="flex items-center justify-center gap-5 text-lg font-medium lg:gap-8 py-6 flex-wrap">
           {links.map((link, index) => (
             <a
               key={index}
@@ -145,10 +145,40 @@ const SiteFooter = () => {
       </div>
 
       {/* المحتوى الرئيسي */}
-      <div className="px-5 py-8 md:px-15 md:pl-40 flex flex-col lg:flex-row-reverse lg:justify-between gap-8 text-right">
-        <div className="flex flex-col items-end">
-          <img src={company.logo} alt="شعار الموقع" className="w-30 mb-2" />
-          <p className="mb-3 max-w-xs md:max-w-md leading-relaxed break-words">
+      <div
+        className={`px-5 py-8 md:px-15 ${isArabic ? "md:pl-40" : "md:pr-40"} flex flex-col lg:flex-row-reverse ${isArabic ? "lg:flex-row-reverse text-right" : "lg:flex-row text-left"} lg:justify-between gap-8`}
+      >
+        {/* البريد الإلكتروني */}
+        <div className={`flex items-center lg:w-1/2 gap-3 flex-wrap lg:flex-nowrap ${isArabic ? "lg:flex-row-reverse justify-end order-2" : "lg:flex-row justify-start order-1"}`}>
+          <p className="font-bold whitespace-nowrap">
+            {language === "ar" ? "البريد الإلكتروني" : "Email"}
+          </p>
+          <div className={`flex ${isArabic ? "flex-row-reverse" : "flex-row"} border rounded overflow-hidden w-full`}>
+            <input
+              type="text"
+              value={company.email}
+              readOnly
+              className={`bg-transparent px-3 py-2 text-sm flex-1 ${isArabic ? "text-right" : "text-left"}`}
+            />
+            <button
+              onClick={() => navigator.clipboard.writeText(company.email)}
+              className="px-12 py-2 text-sm transition"
+              style={{
+                backgroundColor: theme.copyButton.bgColor,
+                color: theme.copyButton.textColor
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = theme.copyButton.hoverBg}
+              onMouseLeave={(e) => e.target.style.backgroundColor = theme.copyButton.bgColor}
+            >
+              {language === "ar" ? "نسخ" : "Copy"}
+            </button>
+          </div>
+        </div>
+
+        {/* الشعار والسوشال ميديا */}
+        <div className={`flex flex-col ${isArabic ? "items-end order-1" : "items-start order-2"}`}>
+          <img src={company.logoHeader} alt="شعار الموقع" className="w-30 mb-2" />
+          <p className="mb-3 max-w-xs md:max-w-md text-lg leading-relaxed break-words">
             {company.slogan}
           </p>
           <div className="flex gap-1.5 mt-2">
@@ -165,38 +195,14 @@ const SiteFooter = () => {
             ))}
           </div>
         </div>
+      </div>
 
-<div className="flex lg:flex-row-reverse items-center lg:w-1/2 justify-end gap-3 flex-wrap lg:flex-nowrap">
-          <p className="font-bold whitespace-nowrap" >البريد الإلكتروني</p>
-          <div className="flex flex-row-reverse border rounded overflow-hidden w-full">
-            <input
-              type="text"
-              value={company.email}
-              readOnly
-              className="bg-transparent px-3 py-2 text-sm flex-1 text-right"
-            />
-            <button
-              onClick={() => navigator.clipboard.writeText(company.email)}
-              className="px-12 py-2 text-sm transition"
-              style={{
-                backgroundColor: theme.copyButton.bgColor,
-                color: theme.copyButton.textColor
-              }}
-              onMouseEnter={(e) => e.target.style.backgroundColor = theme.copyButton.hoverBg}
-              onMouseLeave={(e) => e.target.style.backgroundColor = theme.copyButton.bgColor}
-            >
-              نسخ
-             </button>
-          </div>
-        </div>
-     </div>
-
-     <div className="text-center text-xs p-6" style={{ backgroundColor: theme.copyright.bgColor, color: '#fff' }}>
+      {/* الحقوق */}
+      <div className="text-center text-xs p-6" style={{ backgroundColor: theme.copyright.bgColor, color: '#fff' }}>
         <p>{theme.copyright.text}</p>
       </div>
     </footer>
-      );
- };
+  );
+};
 
- export default SiteFooter;
-
+export default SiteFooter;

@@ -52,7 +52,7 @@
 
 // export default Hero;
 
-import { useDesign } from '../Context/DesignContext.jsx';
+import { useDesign } from '../../Context/DesignContext';
 
 const Hero = () => {
   const { designData, loading } = useDesign();
@@ -121,7 +121,7 @@ const Hero = () => {
                 e.target.style.color = textColor2;
               }}
             >
-              <span className="drop-shadow-xl">ابدا رحلتك معنا</span>
+              <span className="drop-shadow-xl">Start now</span>
             </button>
           </div>
         </div>

@@ -86,11 +86,11 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useDesign } from "./Context/DesignContext.jsx";
-import AnimatedSection from "./AnimatedSection.jsx";
+import { useDesign } from "../../Context/DesignContext.jsx";
+import AnimatedSection from "../../AnimatedSection.jsx";
 
 function SpecialEmploy() {
-  const { designData, loading } = useDesign();
+  const { designData, loading , language } = useDesign();
   const [current, setCurrent] = useState(0);
 
   const section = designData?.sections?.eotm;
@@ -163,19 +163,25 @@ function SpecialEmploy() {
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <div
-                className="relative flex flex-col lg:flex-row items-center lg:ml-5 p-3 md:px-6 rounded-lg"
-                style={{
-                  background: `linear-gradient(to right, ${colors.themeColor2}, ${colors.themeColor1})`,
-                }}
-              >
+  className={`relative flex flex-col lg:${language === "ar" ? "flex-row" : "flex-row-reverse"} items-center p-3 md:px-6 rounded-lg`}
+  style={{
+    background: `linear-gradient(to ${language === "ar" ? "right" : "left"}, ${colors.themeColor2}, ${colors.themeColor1})`,
+    minWidth: "320px",
+    maxWidth: "900px",
+    width: "100%"
+  }}
+>
+
+
                 <img
                   src={employees[current].image}
                   alt={employees[current].name}
-                  className="lg:max-w md:ml-9 md:mr-9 md:mt-5 sm:mt-4 sm:ml-6 sm:mr-4 lg:ml-0 lg:mr-10 lg:mb-4 h-auto object-cover rounded-lg mr-5 ml-5 mb-0"
+                  className="lg:max-w md:ml-9 md:mr-9 md:mt-5 sm:mt-4 sm:ml-6 sm:mr-4 lg:ml-0 lg:mr-10 px-7 lg:mb-4 h-auto object-cover rounded-lg mr-5 ml-5 mb-0"
                 />
-                <div className="w-full text-center lg:text-right lg:w-2/3" style={{ color: colors.textColor1 }}>
+                <div className={`w-full text-${language === "ar" ? "right" : "left"} lg:w-2/3`}
+                    style={{ color: colors.textColor1 }}>
                   <h3 className="text-xl py-7 lg:max-w-[500px] font-bold">{employees[current].name}</h3>
-                  <p className="text-lg lg:max-w-[400px] lg:text-lg leading-relaxed">{employees[current].content}</p>
+                  <p className="text-lg lg:max-w-[400px] lg:text-xl leading-relaxed">{employees[current].content}</p>
                 </div>
               </div>
             </motion.div>

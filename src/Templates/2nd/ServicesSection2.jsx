@@ -154,8 +154,8 @@
 // export default ServicesSection2;
 
 import { useState, useEffect, useRef } from "react";
-import { useDesign } from "../Context/DesignContext.jsx";
-import AnimatedSection from '../AnimatedSection.jsx'
+import { useDesign } from "../../Context/DesignContext.jsx";
+import AnimatedSection from '../../AnimatedSection.jsx'
 
 
 const ServicesSection2 = () => {
@@ -239,7 +239,7 @@ const ServicesSection2 = () => {
               >
                 <img src={`${card.image}?v=${Date.now()}`} alt={card.title} className="w-full h-44 object-cover rounded-md mb-4" />
                 {/* <h2 className="text-lg font-bold text-right">{card.title}</h2> */}
-                <p className="text-sm text-right">{card.content}</p>
+                <p className="text-md ">{card.content}</p>
                 <div className="flex justify-end mt-4">
       
                 </div>

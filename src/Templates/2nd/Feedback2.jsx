@@ -86,12 +86,11 @@
 // export default Feedback2;
 
 import { useState } from 'react';
-import { useDesign } from '../Context/DesignContext.jsx';
-import '../index.css';
-import AnimatedSection from '../AnimatedSection.jsx'
+import { useDesign } from '../../Context/DesignContext';
+import AnimatedSection from '../../AnimatedSection'
 
 function Feedback2() {
-  const { designData, loading } = useDesign();
+  const { designData, loading , language } = useDesign();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (loading || !designData) {
@@ -161,19 +160,21 @@ function Feedback2() {
               style={{ backgroundColor: textColor1, color: textColor2 }}
             >
               <div>
-                <div className="mt-7 ml-5 text-xl font-bold">
+                <div className="mt-7 ml-5 text-xl ${language ? 'text-right' : 'text-left'} font-bold">
                   ⭐ {currentReview.rating}
                   <span className="absolute text-xs ml-2 mt-3 font-light">(التقييم من 5)</span>
                 </div>
-                <p className="mt-8 mx-6 text-md text-right font-medium leading-relaxed">
+                <p className="mt-8 mx-6  text-md text-right font-medium leading-relaxed">
                   {currentReview.comment}
                 </p>
               </div>
 
-              <div
-                className="flex items-center justify-end gap-3 px-4 py-3 rounded-b-lg"
+                <div
+  className={`flex items-center justify-end gap-3 px-4 py-3 rounded-b-lg ${language === "en" ? "flex-row-reverse text-right" : "flex-row text-left"}`}
+  style={{ backgroundColor: textColor2 }}
+
                 style={{ backgroundColor: textColor2 }}
-              >
+             > 
                 {currentReview.image && (
                   <img
                     src={`${currentReview.image}?v=${Date.now()}`}

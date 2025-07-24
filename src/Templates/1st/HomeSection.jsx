@@ -7,7 +7,7 @@
 
 //   return (
 
-//     <div className="h-full bg-[url('/src/assets/5.svg')] bg-cover bg-center bg-no-repeat">
+//     <div className="h-full bg-[url('/src/assets/images/5.svg')] bg-cover bg-center bg-no-repeat">
 //       <Navbar />
 
 //       <section
@@ -54,7 +54,7 @@
 // export default Hero;
 
 
-import { useDesign } from "../Context/DesignContext";
+import { useDesign } from "../../Context/DesignContext";
 
 const Hero = () => {
   const { designData, loading } = useDesign();
@@ -66,7 +66,9 @@ const Hero = () => {
       </div>
     );
   }
-
+  
+  
+  
   const company = {
     title: designData.companyName,
     subtitle: designData.slogan,

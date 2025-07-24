@@ -25,9 +25,9 @@
 
 // export default ServicesSection;
 
-import { useDesign } from "../Context/DesignContext.jsx";
+import { useDesign } from "../../Context/DesignContext.jsx";
 import ServiceCard from "./ServiceCard";
-import AnimatedSection from "../AnimatedSection.jsx";
+import AnimatedSection from "../../AnimatedSection.jsx";
 
 const ServicesSection = () => {
   const { designData, loading } = useDesign();
@@ -59,7 +59,13 @@ const ServicesSection = () => {
           dir="rtl"
         >
           {servicesSection.items.map((service, index) => (
-            <ServiceCard key={index} image={service.image} text={service.text} />
+            <ServiceCard
+                           key={index}
+                          image={service.image}
+                          title={service.title}
+                          content={service.content}
+             />
+
           ))}
         </div>
       </AnimatedSection>

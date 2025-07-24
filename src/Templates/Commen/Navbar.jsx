@@ -63,7 +63,7 @@
 
 
 
-import { useDesign } from '../Context/DesignContext';
+import { useDesign } from '../../Context/DesignContext';
 
 const Navbar = () => {
   const { designData, loading } = useDesign();
@@ -77,7 +77,7 @@ const Navbar = () => {
   }
 
   const {
-    logo,
+    logoHeader,
     textColor2,
     textColor1,
     themeColor1,
@@ -93,8 +93,8 @@ const Navbar = () => {
     { name: sections.location.section_name || 'موقعنا', href: '#locations' },
   ];
 
-  const createButtonText = 'أنشئ ملفك';
-  const loginButtonText = 'تسجيل دخول';
+  const createButtonText = ' Ar ';
+  const loginButtonText = 'Reach Us';
 
   return (
     <nav
@@ -107,7 +107,7 @@ const Navbar = () => {
         <div className="flex flex-wrap justify-center items-center gap-6">
           <div>
             <img
-              src={logo}
+              src={logoHeader}
               alt="شعار"
               className="w-35 h-10 md:w-35 md:h-10 sm:w-35 sm:h-10"
             />

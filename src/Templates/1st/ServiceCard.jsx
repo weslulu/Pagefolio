@@ -1,4 +1,4 @@
-const ServiceCard = ({ image, text, backgroundColor = '#ffffff' }) => {
+const ServiceCard = ({ image, title, content,   backgroundColor = '#ffffff' }) => {
   return (
     <div
       className="relative min-w-[320px] sm:min-w-[350px] md:min-w-[380px] rounded-md shadow-md overflow-visible"
@@ -12,7 +12,8 @@ const ServiceCard = ({ image, text, backgroundColor = '#ffffff' }) => {
 
       <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2  p-4 rounded-sm flex items-center justify-center opacity-90 gap-4 w-[85%] shadow-lg"
       style={{ backgroundColor }}>
-        <p className="text-sm font-semibold text-center">{text}</p>
+        <p className="text-sm font-semibold text-center">{title}</p>
+         <p className="text-md font-bold text-center">{content}</p>
       </div>
     </div>
   );

@@ -38,8 +38,8 @@
 // export default GoalsSection;
 
 import GoalItem2 from './GoalItem2';
-import { useDesign } from '../Context/DesignContext.jsx';
-import AnimatedSection from '../AnimatedSection.jsx'
+import { useDesign } from '../../Context/DesignContext.jsx';
+import AnimatedSection from '../../AnimatedSection.jsx'
 
 const GoalsSection = () => {
   const { designData, loading } = useDesign();

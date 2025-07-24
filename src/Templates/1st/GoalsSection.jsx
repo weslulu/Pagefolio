@@ -37,9 +37,9 @@
 
 // export default GoalsSection;
 
-import { useDesign } from '../Context/DesignContext.jsx'; // استيراد الكونتكس
+import { useDesign } from '../../Context/DesignContext.jsx'; // استيراد الكونتكس
 import GoalItem from './GoalItem';
-import AnimatedSection from '../AnimatedSection.jsx';
+import AnimatedSection from '../../AnimatedSection.jsx';
 
 const GoalsSection = () => {
   const { designData, loading } = useDesign();

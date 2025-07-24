@@ -1,112 +1,240 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { getCompanyInfo } from '../Api/companiesAPI';
+// import { createContext, useContext, useEffect, useState } from 'react';
+// import { getCompanyInfo } from '../Api/companiesAPI';
+
+// const DesignContext = createContext();
+
+// export const DesignProvider = ({ children }) => {
+//   const [designData, setDesignData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     getCompanyInfo()
+//       .then(res => {
+//         const layout1Page = res.data.data.find(p => p.layout === "2");
+//         if (!layout1Page) return;
+
+//         const base = "http://68.183.28.116/storage/";
+//         const company = layout1Page.company;
+//         const sections = layout1Page.sections[0];
+
+//         setDesignData({
+//           // ألوان
+//           themeColor1: layout1Page.theme_color1,
+//           themeColor2: layout1Page.theme_color2,
+//           textColor1: layout1Page.text_color1,
+//           textColor2: layout1Page.text_color2,
+
+//           // بيانات الشركة
+//           logo: `${base}${company.logo_url}`,
+//           logoHeader: `${base}${company.header_photo}`,
+//           companyName: company.name,
+//           slogan: company.slogan,
+//           email: company.email,
+
+//           // أقسام الموقع
+//           sections: {
+//             whoWeAre: {
+//               section_name: sections.back_title?.section_name,
+//               text: sections.back_title?.background?.content,
+//               image: `${base}${sections.back_title?.background?.image?.image_url}`
+//             },
+//             services: {
+//   section_name: sections.service_title?.section_name,
+//   content: sections.service_title?.content,
+//   items: sections.service_title?.services?.map(s => ({
+//     title: s.title,
+//     content: s.content,
+//     image: `${base}${s.image.image_url}`
+//   })) || []
+// },
+
+//             objectives: {
+//               section_name: sections.objective_title?.section_name,
+//               items: sections.objective_title?.objectives?.map(o => ({
+//                 text: o.content,
+//                 icon: `${base}${o.icon.icon_url}`
+//               })) || []
+//             },
+//             partners: {
+//               title: sections.partner_title?.section_name,
+//               subtitle: sections.partner_title?.sub_title,
+//               list: sections.partner_title?.partners?.map(p => ({
+//                 image: `${base}${p.image.image_url}`
+//               })) || []
+//             },
+//           feedbacks: {
+//   section_name: sections.feedback_title?.section_name,
+//   icon: `${base}${sections.feedback_title?.feedback_icon}`,
+//   items: sections.feedback_title?.feedbacks?.map(f => ({
+//     id: f.id,
+//     name: f.user,
+//     rating: f.rating,
+//     comment: f.content,
+//     image: f.image?.image_url ? `${base}${f.image.image_url}` : null,
+//   })) || []
+// },
+
+//             eotm: {
+//               section_name: sections.eotm_title?.section_name,
+//               items: sections.eotm_title?.employee_of_the_months?.map(e => ({
+//                 name: e.employee_name,
+//                 content: e.content,
+//                 image: `${base}${e.image.image_url}`
+//               })) || []
+//             },
+//             location: sections.location_title?.locations[0]
+//               ? {
+//                   section_name: sections.location_title?.section_name,
+//                   city: sections.location_title.locations[0].city_name,
+//                   content: sections.location_title.locations[0].content,
+//                   mapUrl: sections.location_title.locations[0].location_url,
+//                   image: `${base}${sections.location_title.locations[0].image.image_url}`
+//                 }
+//               : null,
+//             socials: sections.company_media_accounts?.map(s => ({
+//               icon: `${base}${s.icon.icon_url}`,
+//               link: s.username_account
+//             })) || []
+//           }
+//         });
+
+//         setLoading(false);
+//       })
+//       .catch(err => {
+//         console.error("فشل تحميل البيانات:", err);
+//         setLoading(false);
+//       });
+//   }, []);
+
+//   return (
+//     <DesignContext.Provider value={{ designData, loading }}>
+//       {children}
+//     </DesignContext.Provider>
+//   );
+// };
+
+// export const useDesign = () => useContext(DesignContext);
+
+
+import { createContext, useContext, useEffect, useState } from "react";
+import { getCompanyInfo } from "../Api/companiesAPI";
 
 const DesignContext = createContext();
+
 
 export const DesignProvider = ({ children }) => {
   const [designData, setDesignData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [language, setLanguage] = useState("en");
+  const [pageId, setPageId] = useState(4); // هذا الـ ID حق الصفحة اللي تبغى تعرضها
 
   useEffect(() => {
-    getCompanyInfo()
-      .then(res => {
-        const layout1Page = res.data.data.find(p => p.layout === "2");
-        if (!layout1Page) return;
+  getCompanyInfo()
+    .then((res) => {
+      const pages = res.data.data;
 
-        const base = "http://68.183.28.116/storage/";
-        const company = layout1Page.company;
-        const sections = layout1Page.sections[0];
+      // ❗ اختار الصفحة بناءً على الـ ID
+      const layoutPage = pages.find((p) => p.id === pageId);
 
-        setDesignData({
-          // ألوان
-          themeColor1: layout1Page.theme_color1,
-          themeColor2: layout1Page.theme_color2,
-          textColor1: layout1Page.text_color1,
-          textColor2: layout1Page.text_color2,
+      if (!layoutPage) {
+        console.warn(`ما في صفحة بهذا الـ ID: ${pageId}`);
+        return;
+      }
 
-          // بيانات الشركة
-          logo: `${base}${company.header_photo}`,
-          companyName: company.name,
-          slogan: company.slogan,
-          email: company.email,
+      setLanguage(layoutPage.language || "en");
 
-          // أقسام الموقع
-          sections: {
-            whoWeAre: {
-              section_name: sections.back_title?.section_name,
-              text: sections.back_title?.background?.content,
-              image: `${base}${sections.back_title?.background?.image?.image_url}`
-            },
-            services: {
-  section_name: sections.service_title?.section_name,
-  content: sections.service_title?.content,
-  items: sections.service_title?.services?.map(s => ({
-    title: s.title,
-    content: s.content,
-    image: `${base}${s.image.image_url}`
-  })) || []
-},
+      const base = "http://68.183.28.116/storage/";
+      const company = layoutPage.company;
+      const sections = layoutPage.sections[0];
 
-            objectives: {
-              section_name: sections.objective_title?.section_name,
-              items: sections.objective_title?.objectives?.map(o => ({
-                text: o.content,
-                icon: `${base}${o.icon.icon_url}`
-              })) || []
-            },
-            partners: {
-              title: sections.partner_title?.section_name,
-              subtitle: sections.partner_title?.sub_title,
-              list: sections.partner_title?.partners?.map(p => ({
-                image: `${base}${p.image.image_url}`
-              })) || []
-            },
+      setDesignData({
+        layout: layoutPage.layout,
+        themeColor1: layoutPage.theme_color1,
+        themeColor2: layoutPage.theme_color2,
+        textColor1: layoutPage.text_color1,
+        textColor2: layoutPage.text_color2,
+
+        logo: `${base}${company.logo_url}`,
+        logoHeader: `${base}${company.header_photo}`,
+        companyName: company.name,
+        slogan: company.slogan,
+        email: company.email,
+
+        sections: {
+          whoWeAre: {
+            section_name: sections.back_title?.section_name,
+            text: sections.back_title?.background?.content,
+            image: `${base}${sections.back_title?.background?.image?.image_url}`,
+          },
+          services: {
+            section_name: sections.service_title?.section_name,
+            content: sections.service_title?.content,
+            items: sections.service_title?.services?.map((s) => ({
+              title: s.title,
+              content: s.content,
+              image: `${base}${s.image.image_url}`,
+            })) || [],
+          },
+          objectives: {
+            section_name: sections.objective_title?.section_name,
+            items: sections.objective_title?.objectives?.map((o) => ({
+              text: o.content,
+              icon: `${base}${o.icon.icon_url}`,
+            })) || [],
+          },
+          partners: {
+            title: sections.partner_title?.section_name,
+            subtitle: sections.partner_title?.sub_title,
+            list: sections.partner_title?.partners?.map((p) => ({
+              image: `${base}${p.image.image_url}`,
+            })) || [],
+          },
           feedbacks: {
-  section_name: sections.feedback_title?.section_name,
-  icon: `${base}${sections.feedback_title?.feedback_icon}`,
-  items: sections.feedback_title?.feedbacks?.map(f => ({
-    id: f.id,
-    name: f.user,
-    rating: f.rating,
-    comment: f.content,
-    image: f.image?.image_url ? `${base}${f.image.image_url}` : null,
-  })) || []
-},
-
-            eotm: {
-              section_name: sections.eotm_title?.section_name,
-              items: sections.eotm_title?.employee_of_the_months?.map(e => ({
-                name: e.employee_name,
-                content: e.content,
-                image: `${base}${e.image.image_url}`
-              })) || []
-            },
-            location: sections.location_title?.locations[0]
-              ? {
-                  section_name: sections.location_title?.section_name,
-                  city: sections.location_title.locations[0].city_name,
-                  content: sections.location_title.locations[0].content,
-                  mapUrl: sections.location_title.locations[0].location_url,
-                  image: `${base}${sections.location_title.locations[0].image.image_url}`
-                }
-              : null,
-            socials: sections.company_media_accounts?.map(s => ({
-              icon: `${base}${s.icon.icon_url}`,
-              link: s.username_account
-            })) || []
-          }
-        });
-
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("فشل تحميل البيانات:", err);
-        setLoading(false);
+            section_name: sections.feedback_title?.section_name,
+            icon: `${base}${sections.feedback_title?.feedback_icon}`,
+            items: sections.feedback_title?.feedbacks?.map((f) => ({
+              id: f.id,
+              name: f.user,
+              rating: f.rating,
+              comment: f.content,
+              image: f.image?.image_url ? `${base}${f.image.image_url}` : null,
+            })) || [],
+          },
+          eotm: {
+            section_name: sections.eotm_title?.section_name,
+            items: sections.eotm_title?.employee_of_the_months?.map((e) => ({
+              name: e.employee_name,
+              content: e.content,
+              image: `${base}${e.image.image_url}`,
+            })) || [],
+          },
+          location: sections.location_title?.locations[0]
+            ? {
+                section_name: sections.location_title?.section_name,
+                city: sections.location_title.locations[0].city_name,
+                content: sections.location_title.locations[0].content,
+                mapUrl: sections.location_title.locations[0].location_url,
+                image: `${base}${sections.location_title.locations[0].image.image_url}`,
+              }
+            : null,
+          socials: sections.company_media_accounts?.map((s) => ({
+            icon: `${base}${s.icon.icon_url}`,
+            link: s.username_account,
+          })) || [],
+        },
       });
-  }, []);
+
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("فشل تحميل البيانات:", err);
+      setLoading(false);
+    });
+}, [pageId]); // 👈 ربطناه بالـ pageId
+
 
   return (
-    <DesignContext.Provider value={{ designData, loading }}>
+    <DesignContext.Provider value={{ designData, loading, language,  pageId, setPageId  }}>
       {children}
     </DesignContext.Provider>
   );

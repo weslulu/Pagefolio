@@ -113,12 +113,11 @@
 
 // export default ContactSection;
 
-
-import { useDesign } from '../Context/DesignContext.jsx';
-import AnimatedSection from '../AnimatedSection.jsx';
+import { useDesign } from '../../Context/DesignContext.jsx';
+import AnimatedSection from '../../AnimatedSection.jsx';
 
 const ContactSection = () => {
-  const { designData, loading } = useDesign();
+  const { designData, loading, language } = useDesign();
 
   const location = designData?.sections?.location;
   const bgColor = designData?.themeColor1 || '#ffffff';
@@ -127,8 +126,12 @@ const ContactSection = () => {
 
   if (loading || !location) return null;
 
+  const isArabic = language === "ar";
+  const direction = isArabic ? "rtl" : "ltr";
+  const textAlign = isArabic ? "right" : "left";
+
   return (
-    <section>
+    <section dir={direction}>
       <div style={{ backgroundColor: bgColor }}>
         <AnimatedSection>
           <div className="py-20 md:px-30 px-13">
@@ -140,14 +143,17 @@ const ContactSection = () => {
                   className="rounded-lg shadow-w-100 w-full h-full object-cover"
                 />
               </a>
-              <div className="max-w-xl lg:text-right text-center">
+              <div className={`max-w-xl lg:text-${textAlign} text-center`}>
                 <h2
-                  className="font-bold mb-4 md:text-4xl text-3xl"
+                  className={`font-bold mb-4 md:text-4xl text-3xl text-${textAlign}`}
                   style={{ color: titleColor }}
                 >
                   {location.section_name}
                 </h2>
-                <p className="leading-loose text-lg" style={{ color: paragraphColor }}>
+                <p
+                  className={`leading-loose text-xl text-${textAlign}`}
+                  style={{ color: paragraphColor }}
+                >
                   {location.content}
                 </p>
               </div>

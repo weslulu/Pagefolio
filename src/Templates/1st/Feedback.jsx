@@ -244,8 +244,9 @@
 
 // export default Feedback;
 
+
 import { useState, useRef, useEffect } from 'react';
-import { useDesign } from './Context/DesignContext';
+import { useDesign } from '../../Context/DesignContext';
 
 function Feedback() {
   const { designData, loading } = useDesign();
@@ -299,7 +300,7 @@ function Feedback() {
       key={review.id}
       onMouseEnter={() => { setHoveredReview(review); setIsPaused(true); }}
       onMouseLeave={() => { setHoveredReview(null); setIsPaused(false); }}
-      className="relative rounded-full px-2 sm:px-3 py-2 shadow text-xs sm:text-sm cursor-pointer flex items-center gap-1 sm:gap-2 min-w-[200px] sm:min-w-[220px] hover:shadow-lg transition transform hover:scale-105"
+      className="relative rounded-full px-2 sm:px-3 py-2 shadow text-xs sm:text-sm cursor-pointer flex items-center gap-1 sm:gap-2 min-w-[200px] sm:min-w-[250px] hover:shadow-lg transition transform hover:scale-105"
       style={{ backgroundColor: textColor2, color: bgColor1 }}
     >
       <div className="flex items-center gap-3">
@@ -308,7 +309,7 @@ function Feedback() {
           alt={review.name}
           className="w-8 h-8 rounded-full"
         />
-        <span className="text-sm font-medium text-center">{review.name}</span>
+        <span className="text-lg font-medium text-center">{review.name}</span>
       </div>
       <div className="flex text-yellow-400">
         {Array.from({ length: 5 }, (_, i) => (
