@@ -159,7 +159,7 @@ import AnimatedSection from '../../AnimatedSection.jsx'
 
 
 const ServicesSection2 = () => {
-  const { designData, loading } = useDesign();
+  const { designData, loading , language } = useDesign();
   const [index, setIndex] = useState(0);
   const containerRef = useRef(null);
   const cardWidth = 350;
@@ -239,10 +239,10 @@ const ServicesSection2 = () => {
               >
                 <img src={`${card.image}?v=${Date.now()}`} alt={card.title} className="w-full h-44 object-cover rounded-md mb-4" />
                 {/* <h2 className="text-lg font-bold text-right">{card.title}</h2> */}
-                <p className="text-md ">{card.content}</p>
-                <div className="flex justify-end mt-4">
-      
-                </div>
+                <p className={`text-md ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+                   {card.content}
+                   </p>
+
               </div>
             ))}
           </div>
@@ -262,15 +262,12 @@ const ServicesSection2 = () => {
         {cards.map((card, i) => (
           <div
             key={i}
-            className="relative z-0 w-[85vw] flex-shrink-0  rounded-lg shadow-lg snap-start p-4 my-2 "
+            className="relative z-0 w-[350px] flex-shrink-0  rounded-lg shadow-lg snap-start p-4 my-2 "
             style={{backgroundColor:themeColor2, color:themeColor1}}
           >
             <img src={`${card.image}?v=${Date.now()}`} alt={card.title} className="w-full h-40 object-cover rounded-md mb-3" />
             {/* <h2 className="font-bold text-right">{card.title}</h2> */}
-            <p className="text-sm text-right">{card.content}</p>
-            <div className="flex justify-end mt-4">
-            
-            </div>
+            <p className={`text-md ${language === 'ar' ? 'text-right' : 'text-left'}`}>{card.content}</p>
           </div>
         ))}
       </div>

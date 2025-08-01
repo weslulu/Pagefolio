@@ -126,7 +126,7 @@ export const DesignProvider = ({ children }) => {
   const [designData, setDesignData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState("en");
-  const [pageId, setPageId] = useState(4); // هذا الـ ID حق الصفحة اللي تبغى تعرضها
+  const [pageId, setPageId] = useState(1); // هذا الـ ID حق الصفحة اللي تبغى تعرضها
 
   useEffect(() => {
   getCompanyInfo()

@@ -120,8 +120,8 @@ const Hero = () => {
                 e.target.style.backgroundColor = textColor1;
                 e.target.style.color = textColor2;
               }}
-            >
-              <span className="drop-shadow-xl">Start now</span>
+            > 
+              <span className="drop-shadow-xl"> Start Now</span> 
             </button>
           </div>
         </div>

@@ -2,6 +2,6 @@ import { api } from './axios';
 
 
 // هباب 
-export const getCompanyInfo = (id = 2) => {
+export const getCompanyInfo = (id = 1) => {
   return api.get(`info/company/${id}`);
 };
